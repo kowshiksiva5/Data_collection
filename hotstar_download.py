@@ -77,5 +77,5 @@ languages = ["telugu"]
 
 # for i in languages:
 extract("https://www.hotstar.com/in/channels/star-maa")
-extract_movies("")
+extract_movies("https://www.hotstar.com/in/movies")
 
