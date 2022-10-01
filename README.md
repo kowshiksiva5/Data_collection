@@ -6,6 +6,6 @@
 
 ## Future Scope
 1. Anyone interested can try it for other platforms too like netflix or amazon prime or any other platform.
-2. Or you can try to collect the links of the movies and tv shows from the youtube and other websites. which can be downloaded using any open source software like youtube-dl.
+2. One can try to collect the links of the movies and tv shows from the youtube and other websites. which can be downloaded using any open source software like youtube-dl.
 
 
