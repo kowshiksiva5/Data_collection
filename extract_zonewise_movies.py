@@ -1,7 +1,7 @@
 import time
 from bs4 import BeautifulSoup as bs
 
-def extract_serials(url):
+def extract_zonerwise_movies(url):
     name = url.split('/')[-1]
     file_name = name + '.txt'
     print('Extracting', name)
@@ -18,5 +18,3 @@ def extract_serials(url):
     for a in a_tags:
         with open(file_name, "a") as f:
             f.write("https://www.hotstar.com"+ a["href"]+'\n')
-            text = extract_episodes_list("https://www.hotstar.com"+ a["href"])
-            extract_episodes("https://www.hotstar.com"+ text)
