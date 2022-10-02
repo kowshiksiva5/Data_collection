@@ -1,15 +1,18 @@
 import time
 from bs4 import BeautifulSoup as bs
+from numpy import empty
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from extract_movies import *
+
+driver_location = '/home/kk/chromedriver_linux64/chromedriver'
 
 def extract_episodes(url):
     name = url.split('/')[5]
     file_name = name + '.txt'
     print('Extracting', name)
 
-    s = Service('/home/west/Downloads/noa/chromedriver')
+    s = Service(driver_location)
     driver = webdriver.Chrome(service=s)
     driver.get(url)
     time.sleep(5)
@@ -24,7 +27,7 @@ def extract_episodes(url):
             f.write("https://www.hotstar.com"+a["href"] + "\n")
 
 def extract_episodes_list(url):
-    s = Service('/home/west/Downloads/noa/chromedriver')
+    s = Service(driver_location)
     driver = webdriver.Chrome(service=s)
     driver.get(url)
     time.sleep(5)
@@ -57,7 +60,7 @@ def extract(url):
     file_name = name + '.txt'
     print('Extracting', name)
 
-    s = Service('/home/west/Downloads/noa/chromedriver')
+    s = Service(driver_location)
     driver = webdriver.Chrome(service=s)
     driver.get(url)
     time.sleep(5)
@@ -69,13 +72,27 @@ def extract(url):
     for a in a_tags:
         with open(file_name, "a") as f:
             f.write("https://www.hotstar.com"+ a["href"]+'\n')
-            text = extract_episodes_list("https://www.hotstar.com"+ a["href"])
-            extract_episodes("https://www.hotstar.com"+ text)
+            # episodes_list = extract_episodes_list("https://www.hotstar.com"+ a["href"])
+            # extract_episodes("https://www.hotstar.com"+ episodes_list)
 
+
+
+def usefiles(file1):
+    with open(file1) as f:
+        lines1 = f.readlines()
+    lines1 = [line.strip() for line in lines1]
+    for i in lines1:
+        list = extract_episodes_list(i)
+        name = i.split('/')[-1]
+        file_name = name + '.txt'
+        with open('output/'+file_name, "a") as f:
+            print('Extracting', list)
+            if list:
+                f.write(list + "\n")
+            
 # languages = ["odia", "hindi", "bengali", "telugu", "malayalam", "tamil", "marathi", "english", "kannada", "korean", "japanese"]
-languages = ["telugu"]
+# languages = ["telugu"]
 
 # for i in languages:
-extract("https://www.hotstar.com/in/channels/star-maa")
-extract_movies("https://www.hotstar.com/in/movies")
-
+# extract("https://www.hotstar.com/in/languages/telugu")
+usefiles('seperated.txt')
